@@ -15,8 +15,6 @@ const getGithubRepos = async githubAccessToken => {
   return result.data.slice(0, 3)
 }
 
-const repoView = ({ full_name }) => ({ fullName: full_name })
-
 class Private extends Component {
   static propTypes = {
     repos: PropTypes.arrayOf(PropTypes.shape({
@@ -25,8 +23,7 @@ class Private extends Component {
   }
 
   static async getInitialProps ({ github: { accessToken } }) {
-    const githubRepos = await getGithubRepos(accessToken)
-    const repos = githubRepos.map(repoView)
+    const repos = await getGithubRepos(accessToken)
     return { repos }
   }
 
@@ -50,8 +47,8 @@ class Private extends Component {
 
         {!!repos.length && (
           <ul style={{ margin: 0 }}>
-            {repos.map(({ fullName }) => (
-              <li key={fullName}>{fullName}</li>
+            {repos.map(({ full_name }) => (
+              <li key={full_name}>{full_name}</li>
             ))}
           </ul>
         )}

@@ -8,17 +8,15 @@ const styles = {
   top: 20
 }
 
-const signOutLink = (
-  <Link href='/sign-out'>
-    <a className='sign-out'>sign out</a>
-  </Link>
-)
-
-const SignInOrProfileLink = (props, { github }) => {
+const SignInOrProfileLink = ({ github }) => {
   return (
     <div style={styles}>
       {github.user
-        ? <div>hi {github.user.login} ({signOutLink})</div>
+        ? <div>hi {github.user.login}
+            <Link href='/sign-out'>
+              <a className='sign-out'>sign out</a>
+            </Link>
+          </div>
         : <Link href='/sign-in'><a className='sign-in'>sign in</a></Link>
       }
     </div>
